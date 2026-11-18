@@ -1,4 +1,7 @@
+let formCounter = 0;
+
 export default function decorate(block) {
+  const formId = ++formCounter;
   const rows = [...block.children];
   const form = document.createElement('form');
   form.className = 'form-form';
@@ -22,7 +25,7 @@ export default function decorate(block) {
 
     if (!labelText) return;
 
-    const id = labelText.toLowerCase().replace(/[^a-z0-9]+/g, '-');
+    const id = `${labelText.toLowerCase().replace(/[^a-z0-9]+/g, '-')}-${formId}`;
     const field = document.createElement('div');
     field.className = 'form-field';
 

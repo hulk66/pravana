@@ -12,7 +12,7 @@ export default function decorate(block) {
     if (image) {
       const imageDiv = document.createElement('div');
       imageDiv.className = 'cards-card-image';
-      if (isDriveImage(image.src)) {
+      if (isDriveImage(image.src) || image.src.includes('cdn.jsdelivr.net')) {
         const img = document.createElement('img');
         img.src = image.src;
         img.alt = image.alt;

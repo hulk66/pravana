@@ -17,6 +17,7 @@ export default function decorate(block) {
     labelEl.className = 'distributor-link-label';
     labelEl.textContent = label;
 
+    link.textContent = 'Shop now';
     link.className = 'button secondary';
     link.target = '_blank';
     link.rel = 'noopener';
