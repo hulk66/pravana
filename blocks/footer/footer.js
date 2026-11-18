@@ -17,4 +17,20 @@ export default async function decorate(block) {
   while (fragment.firstElementChild) footer.append(fragment.firstElementChild);
 
   block.append(footer);
+
+  const newsletter = block.querySelector('.footer-newsletter');
+  const status = block.querySelector('.footer-newsletter-status');
+  if (newsletter && status) {
+    newsletter.addEventListener('submit', (event) => {
+      event.preventDefault();
+      const email = newsletter.querySelector('input[type="email"]');
+      if (!email?.value.trim() || !/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email.value)) {
+        status.textContent = 'Please enter a valid email address.';
+        email?.focus();
+        return;
+      }
+      status.textContent = 'Thanks — this is a demo. No data was sent.';
+      newsletter.reset();
+    });
+  }
 }
