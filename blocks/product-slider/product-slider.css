@@ -1,0 +1,88 @@
+.product-slider {
+  position: relative;
+}
+
+.product-slider-track {
+  display: flex;
+  gap: 20px;
+  overflow-x: auto;
+  padding: 8px 2px 20px;
+  scroll-snap-type: x mandatory;
+  scrollbar-width: none;
+}
+
+.product-slider-track::-webkit-scrollbar {
+  display: none;
+}
+
+.product-slider-item {
+  flex: 0 0 280px;
+  scroll-snap-align: start;
+  background-color: #f6f6f6;
+}
+
+.product-slider-item img {
+  display: block;
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  object-fit: cover;
+}
+
+.product-slider-body {
+  padding: 18px 18px 20px;
+}
+
+.product-slider-body h3 {
+  margin: 0 0 8px;
+  font-family: var(--heading-font-family);
+  font-size: 24px;
+  font-weight: 400;
+  line-height: 1.2;
+}
+
+.product-slider-body p {
+  margin: 0 0 12px;
+  color: #3b264c;
+  font-family: var(--ui-font-family);
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+.product-slider-link {
+  font-family: var(--ui-font-family);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+
+.product-slider-controls {
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
+  margin-top: 4px;
+}
+
+.product-slider-controls button {
+  width: 40px;
+  height: 40px;
+  border: 1px solid #140d19;
+  background: transparent;
+  color: #140d19;
+  cursor: pointer;
+  font-size: 18px;
+  line-height: 1;
+}
+
+.product-slider-controls button:hover {
+  background: #140d19;
+  color: #fff;
+}
+
+@media (width >= 900px) {
+  .product-slider-item {
+    flex-basis: 300px;
+  }
+}

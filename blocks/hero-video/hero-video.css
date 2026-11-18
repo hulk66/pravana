@@ -1,0 +1,89 @@
+.hero-video-container .hero-video-wrapper {
+  max-width: none;
+  padding: 0;
+}
+
+.hero-video {
+  position: relative;
+  min-height: 78vh;
+  overflow: hidden;
+  background-color: #140d19;
+  color: #fff;
+}
+
+.hero-video-inner {
+  position: relative;
+  display: grid;
+  place-items: center;
+  min-height: 78vh;
+}
+
+.hero-video-poster {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 30%;
+}
+
+.hero-video-inner::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgb(20 13 25 / 25%), rgb(20 13 25 / 72%));
+}
+
+.hero-video-overlay {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  padding: 56px 24px;
+  text-align: center;
+}
+
+.hero-video-title {
+  margin: 0;
+  color: #fff;
+  font-family: var(--ui-font-family);
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+}
+
+.hero-video-logo {
+  width: min(480px, 78vw);
+  height: auto;
+}
+
+.hero-video-subtitle {
+  margin: 0;
+  color: #fff;
+  font-family: var(--ui-font-family);
+  font-size: 13px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+
+.hero-video .button.primary {
+  border-color: #fff;
+  background-color: #fff;
+  color: #140d19;
+}
+
+.hero-video .button.primary:hover {
+  border-color: #c296eb;
+  background-color: #c296eb;
+  color: #140d19;
+}
+
+@media (width >= 900px) {
+  .hero-video,
+  .hero-video-inner {
+    min-height: 84vh;
+  }
+}

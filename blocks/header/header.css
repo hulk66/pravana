@@ -1,9 +1,10 @@
-/* header and nav layout */
+/* PRAVANA demo header */
 header .nav-wrapper {
-  background-color: var(--background-color);
-  width: 100%;
-  z-index: 2;
-  position: fixed;
+  background-color: #fff;
+  border-bottom: 1px solid #e6e2e8;
+  position: sticky;
+  top: 0;
+  z-index: 100;
 }
 
 header nav {
@@ -15,10 +16,10 @@ header nav {
   align-items: center;
   gap: 0 24px;
   margin: auto;
-  max-width: 1248px;
-  height: var(--nav-height);
+  max-width: 1360px;
+  min-height: var(--nav-height);
   padding: 0 24px;
-  font-family: var(--body-font-family);
+  font-family: var(--ui-font-family);
 }
 
 header nav[aria-expanded='true'] {
@@ -31,15 +32,11 @@ header nav[aria-expanded='true'] {
 }
 
 @media (width >= 900px) {
-  header .nav-wrapper {
-    position: relative;
-  }
-
   header nav {
     display: flex;
     justify-content: space-between;
     gap: 0 32px;
-    max-width: 1264px;
+    max-width: 1360px;
     padding: 0 32px;
   }
 }
@@ -50,10 +47,15 @@ header nav p {
 }
 
 header nav a:any-link {
-  color: currentcolor;
+  color: var(--text-color);
+  text-decoration: none;
 }
 
-/* hamburger */
+header nav a:hover {
+  color: var(--dark-color);
+  text-decoration: none;
+}
+
 header nav .nav-hamburger {
   grid-area: hamburger;
   height: 22px;
@@ -67,11 +69,8 @@ header nav .nav-hamburger button {
   border: 0;
   border-radius: 0;
   padding: 0;
-  background-color: var(--background-color);
+  background-color: transparent;
   color: inherit;
-  overflow: initial;
-  text-overflow: initial;
-  white-space: initial;
 }
 
 header nav .nav-hamburger-icon,
@@ -98,17 +97,10 @@ header nav[aria-expanded='false'] .nav-hamburger-icon::after {
   background: currentcolor;
 }
 
-header nav[aria-expanded='false'] .nav-hamburger-icon::before {
-  top: -6px;
-}
+header nav[aria-expanded='false'] .nav-hamburger-icon::before { top: -6px; }
+header nav[aria-expanded='false'] .nav-hamburger-icon::after { top: 6px; }
 
-header nav[aria-expanded='false'] .nav-hamburger-icon::after {
-  top: 6px;
-}
-
-header nav[aria-expanded='true'] .nav-hamburger-icon {
-  height: 22px;
-}
+header nav[aria-expanded='true'] .nav-hamburger-icon { height: 22px; }
 
 header nav[aria-expanded='true'] .nav-hamburger-icon::before,
 header nav[aria-expanded='true'] .nav-hamburger-icon::after {
@@ -128,27 +120,21 @@ header nav[aria-expanded='true'] .nav-hamburger-icon::after {
 }
 
 @media (width >= 900px) {
-  header nav .nav-hamburger {
-    display: none;
-    visibility: hidden;
-  }
+  header nav .nav-hamburger { display: none; visibility: hidden; }
 }
 
-/* brand */
 header .nav-brand {
   grid-area: brand;
-  flex-basis: 128px;
-  font-size: var(--heading-font-size-s);
-  font-weight: 700;
+  flex-basis: 180px;
   line-height: 1;
 }
 
 header nav .nav-brand img {
-  width: 128px;
+  width: 180px;
   height: auto;
+  display: block;
 }
 
-/* sections */
 header nav .nav-sections {
   grid-area: sections;
   flex: 1 1 auto;
@@ -165,7 +151,10 @@ header nav[aria-expanded='true'] .nav-sections {
 header nav .nav-sections ul {
   list-style: none;
   padding-left: 0;
-  font-size: var(--body-font-size-s);
+  margin: 0;
+  font-size: 13px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
 }
 
 header nav .nav-sections ul > li {
@@ -176,32 +165,29 @@ header nav .nav-sections .nav-drop > button {
   all: unset;
   display: inline-block;
   position: relative;
-  padding-right: 16px;
+  padding-right: 14px;
   cursor: pointer;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
 }
 
 header nav .nav-sections .nav-drop > button::after {
   content: '';
   position: absolute;
-  top: 0.5em;
-  right: 2px;
+  top: 0.55em;
+  right: 0;
   transform: rotate(135deg);
-  width: 6px;
-  height: 6px;
-  border: 2px solid currentcolor;
-  border-radius: 0 1px 0 0;
-  border-width: 2px 2px 0 0;
+  width: 5px;
+  height: 5px;
+  border: 1.5px solid currentcolor;
+  border-width: 1.5px 1.5px 0 0;
 }
 
 header nav .nav-sections .nav-drop > button[aria-expanded='true']::after {
   top: unset;
-  bottom: 0.5em;
+  bottom: 0.55em;
   transform: rotate(315deg);
-}
-
-header nav .nav-sections .nav-drop > button:focus-visible {
-  outline: 2px solid currentcolor;
-  outline-offset: 2px;
 }
 
 header nav .nav-sections ul > li > ul {
@@ -210,6 +196,9 @@ header nav .nav-sections ul > li > ul {
 
 header nav .nav-sections ul > li > ul > li {
   font-weight: 400;
+  text-transform: none;
+  letter-spacing: 0;
+  font-size: 14px;
 }
 
 header nav .nav-sections .nav-drop > button[aria-expanded='false'] + ul {
@@ -225,7 +214,7 @@ header nav .nav-sections .nav-drop > button[aria-expanded='false'] + ul {
 
   header nav .nav-sections ul {
     display: flex;
-    gap: 24px;
+    gap: 26px;
     margin: 0;
   }
 
@@ -242,32 +231,48 @@ header nav .nav-sections .nav-drop > button[aria-expanded='false'] + ul {
   header nav .nav-sections .default-content-wrapper > ul > li > button[aria-expanded='true'] + ul {
     display: block;
     position: absolute;
-    left: -24px;
-    width: 200px;
-    top: 150%;
-    padding: 16px;
-    background-color: var(--light-color);
+    left: -20px;
+    width: 220px;
+    top: 160%;
+    padding: 18px 20px;
+    background-color: #fff;
+    border: 1px solid #e6e2e8;
+    box-shadow: 0 18px 40px rgb(20 13 25 / 12%);
     white-space: initial;
   }
 
-  header nav .nav-sections .default-content-wrapper > ul > li > ul::before {
-    content: '';
-    position: absolute;
-    top: -8px;
-    left: 16px;
-    width: 0;
-    height: 0;
-    border-left: 8px solid transparent;
-    border-right: 8px solid transparent;
-    border-bottom: 8px solid var(--light-color);
-  }
-
   header nav .nav-sections .default-content-wrapper > ul > li > ul > li {
-    padding: 8px 0;
+    padding: 7px 0;
   }
 }
 
-/* tools */
 header nav .nav-tools {
   grid-area: tools;
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  font-size: 13px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+header nav .nav-tools a {
+  border-bottom: 1px solid transparent;
+  padding-bottom: 2px;
+}
+
+header nav .nav-tools a:hover {
+  border-bottom-color: currentcolor;
+}
+
+@media (width < 900px) {
+  header nav .nav-tools {
+    justify-content: flex-end;
+    gap: 12px;
+  }
+
+  header nav[aria-expanded='true'] .nav-tools {
+    justify-content: flex-start;
+    padding-top: 8px;
+  }
 }

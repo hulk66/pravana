@@ -1,0 +1,40 @@
+.distributor-links-list {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 12px;
+}
+
+.distributor-link {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 16px 18px;
+  border: 1px solid #140d19;
+}
+
+.distributor-link-label {
+  font-family: var(--ui-font-family);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.distributor-link .button.secondary {
+  border-color: #140d19;
+  color: #140d19;
+  padding: 8px 16px;
+  white-space: nowrap;
+}
+
+.distributor-link .button.secondary:hover {
+  background-color: #140d19;
+  color: #fff;
+}
+
+@media (width >= 700px) {
+  .distributor-links-list {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}

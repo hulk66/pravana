@@ -1,0 +1,81 @@
+.form {
+  background-color: #f6f6f6;
+}
+
+.form-form {
+  display: grid;
+  gap: 16px;
+  max-width: 640px;
+  margin: 0 auto;
+}
+
+.form-field {
+  display: grid;
+  gap: 6px;
+}
+
+.form-field label {
+  font-family: var(--ui-font-family);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.form-input {
+  width: 100%;
+  box-sizing: border-box;
+  border: 1px solid #140d19;
+  border-radius: 0;
+  padding: 12px 14px;
+  background-color: #fff;
+  color: #140d19;
+  font-family: var(--ui-font-family);
+  font-size: 15px;
+}
+
+.form-input:focus {
+  outline: 2px solid #c296eb;
+  outline-offset: 1px;
+}
+
+.form-status {
+  margin: 8px 0 0;
+  min-height: 1.5em;
+  color: #3b264c;
+  font-family: var(--ui-font-family);
+  font-size: 14px;
+}
+
+.form .button.primary {
+  border-color: #140d19;
+  background-color: #140d19;
+  color: #fff;
+  border-radius: 0;
+  font-family: var(--ui-font-family);
+  font-size: 12px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  padding: 14px 24px;
+}
+
+.form .button.primary:hover {
+  background-color: #3b264c;
+  border-color: #3b264c;
+}
+
+@media (width >= 700px) {
+  .form-form {
+    grid-template-columns: 1fr 1fr;
+    align-items: end;
+  }
+
+  .form-form .form-field:first-child,
+  .form-form .form-status {
+    grid-column: 1 / -1;
+  }
+
+  .form-form .button.primary {
+    justify-self: start;
+  }
+}

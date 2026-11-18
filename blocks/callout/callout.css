@@ -1,0 +1,23 @@
+.callout-box {
+  max-width: 860px;
+  margin: 32px auto;
+  padding: 24px 28px;
+  background-color: #f6f6f6;
+  border-left: 4px solid #3b264c;
+}
+
+.callout-label {
+  margin: 0 0 8px;
+  color: #3b264c;
+  font-family: var(--ui-font-family);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.callout-text {
+  margin: 0;
+  font-size: 18px;
+  line-height: 1.6;
+}
