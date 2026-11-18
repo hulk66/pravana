@@ -1,27 +1,27 @@
+import { cellLink, cellText } from '../../scripts/content-cells.js';
+
 export default function decorate(block) {
   const list = document.createElement('div');
   list.className = 'distributor-links-list';
 
   [...block.children].forEach((row) => {
-    const [labelCell, linkCell] = row.children;
-    const link = linkCell?.querySelector('a');
+    const [labelCell, urlCell] = row.children;
+    const label = cellText(labelCell);
+    const link = cellLink(urlCell, label);
     if (!link) return;
 
     const item = document.createElement('div');
     item.className = 'distributor-link';
 
-    const label = document.createElement('span');
-    label.className = 'distributor-link-label';
-    label.textContent = labelCell?.textContent.trim() || '';
+    const labelEl = document.createElement('span');
+    labelEl.className = 'distributor-link-label';
+    labelEl.textContent = label;
 
-    const anchor = document.createElement('a');
-    anchor.href = link.href;
-    anchor.textContent = link.textContent;
-    anchor.className = 'button secondary';
-    anchor.target = '_blank';
-    anchor.rel = 'noopener';
+    link.className = 'button secondary';
+    link.target = '_blank';
+    link.rel = 'noopener';
 
-    item.append(label, anchor);
+    item.append(labelEl, link);
     list.append(item);
   });
 

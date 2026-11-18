@@ -1,12 +1,14 @@
+import { cellImage, cellText } from '../../scripts/content-cells.js';
+
 export default function decorate(block) {
   const rows = [...block.children];
   if (!rows.length) return;
 
   const heroRow = rows[0];
-  const [imageCell, textCell] = heroRow.children;
-  const image = imageCell?.querySelector('img');
-  const heading = textCell?.querySelector('h1');
-  const description = textCell?.querySelector('p');
+  const [imageCell, titleCell, descriptionCell] = heroRow.children;
+  const image = cellImage(imageCell);
+  const title = cellText(titleCell);
+  const description = cellText(descriptionCell);
 
   const layout = document.createElement('div');
   layout.className = 'event-detail-layout';
@@ -23,15 +25,15 @@ export default function decorate(block) {
   const content = document.createElement('div');
   content.className = 'event-detail-content';
 
-  if (heading) {
+  if (title) {
     const h1 = document.createElement('h1');
-    h1.textContent = heading.textContent;
+    h1.textContent = title;
     content.append(h1);
   }
 
   if (description) {
     const p = document.createElement('p');
-    p.textContent = description.textContent;
+    p.textContent = description;
     content.append(p);
   }
 
@@ -40,8 +42,8 @@ export default function decorate(block) {
 
   rows.slice(1).forEach((row) => {
     const [labelCell, valueCell] = row.children;
-    const label = labelCell?.textContent.trim();
-    const value = valueCell?.textContent.trim();
+    const label = cellText(labelCell);
+    const value = cellText(valueCell);
     if (!label || !value) return;
 
     const dt = document.createElement('dt');

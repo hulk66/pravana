@@ -1,14 +1,17 @@
+import { cellImage, cellText, isUrl } from '../../scripts/content-cells.js';
+
 export default function decorate(block) {
-  const row = block.querySelector(':scope > div');
-  if (!row) return;
-  const [desktopCell, mobileCell, logoCell, subtitleCell, ctaCell, posterCell] = row.children;
-  const desktopLink = desktopCell?.querySelector('a')?.href || '';
-  const mobileLink = mobileCell?.querySelector('a')?.href || '';
-  const title = desktopCell?.querySelector('a')?.textContent.trim() || '';
-  const logo = logoCell?.querySelector('img');
-  const subtitle = subtitleCell?.textContent.trim() || '';
-  const cta = ctaCell?.querySelector('a');
-  const poster = posterCell?.querySelector('img');
+  const rows = [...block.children];
+  const cell = (r, c) => rows[r]?.children[c];
+
+  const title = cellText(cell(0, 0));
+  const logo = cellImage(cell(0, 1));
+  const desktopLink = cellText(cell(1, 0));
+  const mobileLink = cellText(cell(1, 1));
+  const subtitle = cellText(cell(2, 0));
+  const ctaLabel = cellText(cell(2, 1));
+  const ctaHref = cellText(cell(3, 0));
+  const poster = cellImage(cell(3, 1));
 
   block.textContent = '';
   const hero = document.createElement('div');
@@ -77,10 +80,10 @@ export default function decorate(block) {
     overlay.append(p);
   }
 
-  if (cta) {
+  if (ctaHref && isUrl(ctaHref)) {
     const a = document.createElement('a');
-    a.href = cta.href;
-    a.textContent = cta.textContent;
+    a.href = ctaHref;
+    a.textContent = ctaLabel || 'Learn more';
     a.className = 'button primary';
     overlay.append(a);
   }

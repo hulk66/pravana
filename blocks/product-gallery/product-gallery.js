@@ -1,7 +1,8 @@
+import { cellImage } from '../../scripts/content-cells.js';
+
 export default function decorate(block) {
-  const rows = [...block.children];
-  const images = rows
-    .map((row) => row.querySelector('img'))
+  const images = [...block.children]
+    .map((row) => cellImage(row.children[0]))
     .filter(Boolean);
 
   if (!images.length) return;

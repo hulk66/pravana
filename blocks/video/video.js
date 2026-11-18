@@ -1,10 +1,13 @@
+import { cellImage, cellText, isUrl } from '../../scripts/content-cells.js';
+
 export default function decorate(block) {
   const row = block.children[0];
   if (!row) return;
+
   const [linkCell, posterCell] = row.children;
-  const link = linkCell?.querySelector('a');
-  const poster = posterCell?.querySelector('img');
-  if (!link) return;
+  const href = cellText(linkCell);
+  const poster = cellImage(posterCell);
+  if (!isUrl(href)) return;
 
   const wrapper = document.createElement('div');
   wrapper.className = 'video-embed';
@@ -18,7 +21,7 @@ export default function decorate(block) {
   }
 
   const play = document.createElement('a');
-  play.href = link.href;
+  play.href = href;
   play.textContent = '▶ Watch the technique';
   play.className = 'video-play';
   play.target = '_blank';

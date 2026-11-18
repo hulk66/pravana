@@ -1,3 +1,5 @@
+import { cellImage, cellText, isUrl } from '../../scripts/content-cells.js';
+
 export default function decorate(block) {
   const rows = [...block.children];
   if (!rows.length) return;
@@ -6,11 +8,11 @@ export default function decorate(block) {
   track.className = 'product-slider-track';
 
   rows.forEach((row) => {
-    const [imageCell, textCell] = row.children;
-    const image = imageCell?.querySelector('img');
-    const heading = textCell?.querySelector('h3');
-    const description = textCell?.querySelector('p');
-    const link = textCell?.querySelector('a');
+    const [imageCell, titleCell, descriptionCell, urlCell] = row.children;
+    const image = cellImage(imageCell);
+    const title = cellText(titleCell);
+    const description = cellText(descriptionCell);
+    const href = cellText(urlCell);
 
     const item = document.createElement('article');
     item.className = 'product-slider-item';
@@ -26,22 +28,22 @@ export default function decorate(block) {
     const body = document.createElement('div');
     body.className = 'product-slider-body';
 
-    if (heading) {
+    if (title) {
       const h3 = document.createElement('h3');
-      h3.textContent = heading.textContent;
+      h3.textContent = title;
       body.append(h3);
     }
 
     if (description) {
       const p = document.createElement('p');
-      p.textContent = description.textContent;
+      p.textContent = description;
       body.append(p);
     }
 
-    if (link) {
+    if (isUrl(href)) {
       const a = document.createElement('a');
-      a.href = link.href;
-      a.textContent = link.textContent;
+      a.href = href;
+      a.textContent = 'Explore';
       a.className = 'product-slider-link';
       body.append(a);
     }
