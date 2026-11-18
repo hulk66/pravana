@@ -1,18 +1,20 @@
 export default function decorate(block) {
+  const rows = [...block.children];
   const form = document.createElement('form');
   form.className = 'form-form';
   form.noValidate = true;
 
-  [...block.children].forEach((row) => {
-    const [labelCell, inputCell] = row.children;
-    const labelText = labelCell?.textContent.trim() || '';
-    const existing = inputCell?.querySelector('input, select, textarea');
-    const button = inputCell?.querySelector('button');
+  rows.forEach((row) => {
+    const cells = [...row.children];
+    const labelText = cells[0]?.textContent.trim() || '';
+    const type = (cells[1]?.textContent.trim() || 'text').toLowerCase();
+    const required = (cells[2]?.textContent.trim() || '').toLowerCase() === 'required';
+    const placeholder = cells[3]?.textContent.trim() || '';
 
-    if (button) {
+    if (type === 'submit') {
       const submit = document.createElement('button');
       submit.type = 'submit';
-      submit.textContent = button.textContent;
+      submit.textContent = labelText || 'Submit';
       submit.className = 'button primary';
       form.append(submit);
       return;
@@ -20,24 +22,39 @@ export default function decorate(block) {
 
     if (!labelText) return;
 
+    const id = labelText.toLowerCase().replace(/[^a-z0-9]+/g, '-');
     const field = document.createElement('div');
     field.className = 'form-field';
 
-    const id = labelText.toLowerCase().replace(/[^a-z0-9]+/g, '-');
-    const label = document.createElement('label');
-    label.textContent = labelText;
-    label.htmlFor = id;
+    if (type === 'checkbox') {
+      field.classList.add('form-checkbox');
+      const input = document.createElement('input');
+      input.type = 'checkbox';
+      input.id = id;
+      input.name = id;
+      input.required = required;
 
-    let input = existing;
-    if (!input) {
-      input = document.createElement('input');
-      input.type = labelText.toLowerCase().includes('email') ? 'email' : 'text';
+      const label = document.createElement('label');
+      label.htmlFor = id;
+      label.textContent = labelText;
+
+      field.append(input, label);
+    } else {
+      const label = document.createElement('label');
+      label.htmlFor = id;
+      label.textContent = labelText;
+
+      const input = document.createElement('input');
+      input.type = type;
+      input.id = id;
+      input.name = id;
+      input.required = required;
+      input.placeholder = placeholder;
+      input.className = 'form-input';
+
+      field.append(label, input);
     }
-    input.id = id;
-    input.name = input.name || id;
-    input.classList.add('form-input');
 
-    field.append(label, input);
     form.append(field);
   });
 
@@ -49,7 +66,7 @@ export default function decorate(block) {
   form.addEventListener('submit', (event) => {
     event.preventDefault();
     const required = [...form.querySelectorAll('[required]')];
-    const missing = required.find((input) => !input.value.trim());
+    const missing = required.find((input) => (input.type === 'checkbox' ? !input.checked : !input.value.trim()));
     if (missing) {
       missing.focus();
       status.textContent = 'Please fill in the required fields.';

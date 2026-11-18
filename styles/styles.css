@@ -454,3 +454,45 @@ main .default-content-wrapper:has(h1) > p {
   margin-right: 0;
   text-align: left;
 }
+
+/* article section (default content, author-friendly) */
+main .article.section > .default-content-wrapper {
+  max-width: 860px;
+  margin: 0 auto;
+}
+
+main .article.section .default-content-wrapper h1,
+main .article.section .default-content-wrapper h2,
+main .article.section .default-content-wrapper p {
+  max-width: none;
+  margin-left: 0;
+  margin-right: 0;
+  text-align: left;
+}
+
+main .article.section .default-content-wrapper h1 {
+  font-size: clamp(40px, 6vw, 64px);
+  line-height: 1.05;
+  margin-bottom: 16px;
+}
+
+main .article.section .default-content-wrapper h2 {
+  margin-top: 40px;
+  font-size: clamp(30px, 4vw, 40px);
+}
+
+main .article.section .default-content-wrapper img {
+  display: block;
+  width: 100%;
+  height: auto;
+  margin: 24px 0;
+}
+
+main .article.section .default-content-wrapper em {
+  color: #3b264c;
+  font-family: var(--ui-font-family);
+  font-size: 13px;
+  font-style: normal;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}

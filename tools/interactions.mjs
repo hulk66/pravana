@@ -25,10 +25,10 @@ console.log('accordion open:', await page.evaluate(() => document.querySelector(
 
 await page.goto('http://localhost:3000/l/introkit', { waitUntil: 'networkidle' });
 await page.waitForTimeout(800);
-await page.fill('input[name="firstName"]', 'Demo');
-await page.fill('input[name="lastName"]', 'User');
-await page.fill('input[name="email"]', 'demo@example.com');
-await page.check('input[name="consent"]');
+await page.fill('input[name="first-name"]', 'Demo');
+await page.fill('input[name="last-name"]', 'User');
+await page.fill('input[type="email"]', 'demo@example.com');
+await page.check('input[type="checkbox"]');
 await page.click('button[type="submit"]');
 await page.waitForTimeout(300);
 console.log('form status:', await page.textContent('.form-status'));

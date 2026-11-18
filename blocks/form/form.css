@@ -79,3 +79,23 @@
     justify-self: start;
   }
 }
+
+.form-checkbox {
+  grid-template-columns: auto 1fr;
+  align-items: center;
+  gap: 10px;
+}
+
+.form-checkbox input {
+  width: 16px;
+  height: 16px;
+  margin: 0;
+}
+
+.form-checkbox label {
+  font-family: var(--ui-font-family);
+  font-size: 14px;
+  font-weight: 400;
+  letter-spacing: 0;
+  text-transform: none;
+}
