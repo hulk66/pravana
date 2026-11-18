@@ -1,5 +1,6 @@
 import { getMetadata } from '../../scripts/aem.js';
 import { loadFragment } from '../fragment/fragment.js';
+import normalizeLinks from '../../scripts/links.js';
 
 /**
  * loads and decorates the footer
@@ -15,6 +16,7 @@ export default async function decorate(block) {
   block.textContent = '';
   const footer = document.createElement('div');
   while (fragment.firstElementChild) footer.append(fragment.firstElementChild);
+  normalizeLinks(footer);
 
   block.append(footer);
 
