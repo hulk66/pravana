@@ -103,7 +103,7 @@
 
 @media (width < 700px) {
   .hero-video-inner {
-    aspect-ratio: 4 / 5;
+    aspect-ratio: 9 / 16;
     min-height: 520px;
   }
 
