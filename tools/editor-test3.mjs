@@ -1,0 +1,20 @@
+import { chromium } from 'playwright';
+const browser = await chromium.launch();
+const page = await browser.newPage({ viewport: { width: 1440, height: 1000 } });
+const errors = [];
+page.on('console', (m) => { if (m.type() === 'error') errors.push(m.text()); });
+page.on('pageerror', (e) => errors.push(e.message));
+
+await page.goto('http://localhost:3001/', { waitUntil: 'networkidle' });
+await page.waitForTimeout(800);
+const block = page.locator('.block-card').filter({ has: page.locator('.block-head strong', { hasText: 'product-slider' }) });
+const title = block.locator('.cell-el').filter({ has: page.locator('.tag', { hasText: /^h3$/ }) }).locator('.editable').first();
+console.log('product title:', await title.textContent());
+const rowsBefore = await block.locator('.block-row').count();
+await block.locator('.mini', { hasText: '+ Add row' }).click();
+const rowsAfter = await block.locator('.block-row').count();
+console.log('rows before/after add:', rowsBefore, rowsAfter);
+await page.click('#revert');
+await page.waitForTimeout(600);
+console.log('errors:', errors.length ? errors : 'none');
+await browser.close();
