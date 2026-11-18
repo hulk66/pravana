@@ -10,20 +10,33 @@ const DEMO_HOSTS = new Set([
   'main--pravana--hulk66.aem.live',
 ]);
 
+function normalizePath(pathname) {
+  return pathname
+    .split('/')
+    .map((seg) => seg.replace(/_/g, '-').replace(/-{2,}/g, '-').replace(/^-+|-+$/g, ''))
+    .join('/');
+}
+
 export default function normalizeLinks(root = document) {
   root.querySelectorAll('a[href]').forEach((a) => {
     const href = a.getAttribute('href');
     if (!href) return;
 
     if (/^https?:\/\/\//i.test(href)) {
-      a.setAttribute('href', href.replace(/^https?:\/\//i, ''));
+      const path = href.replace(/^https?:\/\//i, '');
+      a.setAttribute('href', normalizePath(path));
+      return;
+    }
+
+    if (href.startsWith('/')) {
+      a.setAttribute('href', normalizePath(href));
       return;
     }
 
     try {
       const url = new URL(href, window.location.href);
       if (DEMO_HOSTS.has(url.hostname)) {
-        a.setAttribute('href', `${url.pathname}${url.search}${url.hash}`);
+        a.setAttribute('href', `${normalizePath(url.pathname)}${url.search}${url.hash}`);
       }
     } catch (e) {
       // leave malformed links untouched
