@@ -161,6 +161,16 @@ header nav .nav-sections ul > li {
   font-weight: 500;
 }
 
+@media (width < 900px) {
+  header nav .nav-sections ul ul {
+    padding-left: 18px;
+  }
+
+  header nav .nav-sections ul ul > li {
+    font-weight: 400;
+  }
+}
+
 header nav .nav-sections .nav-drop > button {
   all: unset;
   display: inline-block;
