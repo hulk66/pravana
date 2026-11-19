@@ -145,6 +145,14 @@ export default async function decorate(block) {
       navSection.addEventListener('mouseleave', () => {
         if (isDesktop.matches) button.setAttribute('aria-expanded', 'false');
       });
+      navSection.addEventListener('focusin', () => {
+        if (isDesktop.matches) button.setAttribute('aria-expanded', 'true');
+      });
+      navSection.addEventListener('focusout', (event) => {
+        if (isDesktop.matches && !navSection.contains(event.relatedTarget)) {
+          button.setAttribute('aria-expanded', 'false');
+        }
+      });
     });
   }
 
