@@ -228,12 +228,14 @@ header nav .nav-sections .nav-drop > button[aria-expanded='false'] + ul {
     position: relative;
   }
 
-  header nav .nav-sections .default-content-wrapper > ul > li > button[aria-expanded='true'] + ul {
+  header nav .nav-sections .default-content-wrapper > ul > li > button[aria-expanded='true'] + ul,
+  header nav .nav-sections .default-content-wrapper > ul > li:hover > ul,
+  header nav .nav-sections .default-content-wrapper > ul > li:focus-within > ul {
     display: block;
     position: absolute;
     left: -20px;
     width: 220px;
-    top: 160%;
+    top: calc(100% + 28px);
     padding: 18px 20px;
     background-color: #fff;
     border: 1px solid #e6e2e8;
@@ -241,8 +243,18 @@ header nav .nav-sections .nav-drop > button[aria-expanded='false'] + ul {
     white-space: initial;
   }
 
+
   header nav .nav-sections .default-content-wrapper > ul > li > ul > li {
     padding: 7px 0;
+  }
+
+  header nav .nav-sections .default-content-wrapper > ul > li.nav-drop::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 100%;
+    height: 30px;
   }
 }
 

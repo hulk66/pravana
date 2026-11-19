@@ -139,6 +139,12 @@ export default async function decorate(block) {
         }
         button.setAttribute('aria-expanded', !expanded);
       });
+      navSection.addEventListener('mouseenter', () => {
+        if (isDesktop.matches) button.setAttribute('aria-expanded', 'true');
+      });
+      navSection.addEventListener('mouseleave', () => {
+        if (isDesktop.matches) button.setAttribute('aria-expanded', 'false');
+      });
     });
   }
 

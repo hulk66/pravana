@@ -182,6 +182,26 @@ async function loadEager(doc) {
 }
 
 /**
+ * Fades sections in as they scroll into view, matching the source site.
+ * The first section is excluded so it never delays LCP.
+ * @param {Element} main The main element
+ */
+function decorateReveal(main) {
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  const sections = [...main.querySelectorAll(':scope > .section')].slice(1);
+  if (!sections.length) return;
+  sections.forEach((section) => section.classList.add('reveal'));
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (!entry.isIntersecting) return;
+      entry.target.classList.add('is-visible');
+      observer.unobserve(entry.target);
+    });
+  }, { threshold: 0.12, rootMargin: '0px 0px -8% 0px' });
+  sections.forEach((section) => observer.observe(section));
+}
+
+/**
  * Loads everything that doesn't need to be delayed.
  * @param {Element} doc The container element
  */
@@ -190,6 +210,7 @@ async function loadLazy(doc) {
 
   const main = doc.querySelector('main');
   await loadSections(main);
+  decorateReveal(main);
 
   const { hash } = window.location;
   const element = hash ? doc.getElementById(hash.substring(1)) : false;
