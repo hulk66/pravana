@@ -197,7 +197,7 @@ function decorateReveal(main) {
       entry.target.classList.add('is-visible');
       observer.unobserve(entry.target);
     });
-  }, { threshold: 0.12, rootMargin: '0px 0px -8% 0px' });
+  }, { threshold: 0.05, rootMargin: '0px 0px -120px 0px' });
   sections.forEach((section) => observer.observe(section));
 }
 
